@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Wildcam log</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 720px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    form { display: grid; gap: .6rem; margin-bottom: 2rem; }
+    label { display: grid; gap: .2rem; font-size: .9rem; }
+    input, button { padding: .5rem; font-size: 1rem; }
+    button { background: #2f6b3f; color: white; border: 0; border-radius: 4px; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: .4rem; border-bottom: 1px solid #ddd; }
+    .host { color: #888; font-size: .8rem; margin-top: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Wildcam sightings</h1>
+
+  <form method="post">
+    <label>Animal <input name="animal" required placeholder="e.g. brown bear"></label>
+    <label>Stream <input name="stream" required placeholder="e.g. Katmai river cam"></label>
+    <label>Seen at <input name="seen_at" type="datetime-local" required></label>
+    <button type="submit">Log sighting</button>
+  </form>
+
+  <h2>All sightings</h2>
+  {% if rows %}
+  <table>
+    <tr><th>When</th><th>Animal</th><th>Stream</th></tr>
+    {% for animal, stream, seen_at in rows %}
+    <tr><td>{{ seen_at.strftime('%Y-%m-%d %H:%M') }}</td><td>{{ animal }}</td><td>{{ stream }}</td></tr>
+    {% endfor %}
+  </table>
+  {% else %}
+  <p>No sightings yet.</p>
+  {% endif %}
+
+  <p class="host">Served by: {{ host }}</p>
+</body>
+</html>
