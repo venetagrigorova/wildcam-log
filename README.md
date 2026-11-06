@@ -15,10 +15,11 @@ Then open http://localhost:8000. Stop with Ctrl+C.
 
 ## Configuration
 
-The app reads one environment variable:
+The app reads two environment variables:
 
 | Variable | Example |
 |---|---|
+| `HOST` | `worker1` (shown on the page as "Served by") |
 | `DATABASE_URL` | `postgresql://postgres:PASSWORD@192.168.100.101:5432/wildcam` |
 
 The table is created automatically on first start.
@@ -27,10 +28,10 @@ The table is created automatically on first start.
 
 ```
 docker build -t wildcam .
-docker run -d --name wildcam --restart always \
-  --hostname "$(hostname)" -p 8080:8000 \
+docker run -d --name wildcam --restart always -p 8000:8000 \
+  -e HOST="$(hostname)" \
   -e DATABASE_URL=postgresql://postgres:PASSWORD@192.168.100.101:5432/wildcam \
   wildcam
 ```
 
-The page footer shows which worker served the request, which makes load balancing visible.
+The top of the page shows which worker served the request, which makes load balancing visible.

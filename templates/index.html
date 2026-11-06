@@ -12,11 +12,12 @@
     button { background: #2f6b3f; color: white; border: 0; border-radius: 4px; cursor: pointer; }
     table { width: 100%; border-collapse: collapse; }
     th, td { text-align: left; padding: .4rem; border-bottom: 1px solid #ddd; }
-    .host { color: #888; font-size: .8rem; margin-top: 2rem; }
+    .host { display: inline-block; background: #e8f1ea; color: #2f6b3f; padding: .3rem .7rem; border-radius: 4px; font-size: .9rem; }
   </style>
 </head>
 <body>
   <h1>Wildcam sightings</h1>
+  <p class="host">Served by: <strong>{{ host }}</strong></p>
 
   <form method="post">
     <label>Animal <input name="animal" required placeholder="e.g. brown bear"></label>
@@ -37,6 +38,5 @@
   <p>No sightings yet.</p>
   {% endif %}
 
-  <p class="host">Served by: {{ host }}</p>
 </body>
 </html>

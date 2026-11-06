@@ -12,6 +12,10 @@ DB_URL = os.environ.get(
     "DATABASE_URL", "postgresql://postgres:password@db:5432/wildcam"
 )
 
+# Name of the worker VM, passed in with -e HOST=$(hostname) on docker run.
+# Falls back to the container's own hostname if not set.
+HOST = os.environ.get("HOST", socket.gethostname())
+
 
 def get_conn():
     return psycopg.connect(DB_URL)
@@ -53,7 +57,7 @@ def index():
 
     # The hostname shows which worker answered, handy for proving
     # the load balancer spreads requests across all three.
-    return render_template("index.html", rows=rows, host=socket.gethostname())
+    return render_template("index.html", rows=rows, host=HOST)
 
 
 @app.route("/health")
