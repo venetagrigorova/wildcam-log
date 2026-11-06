@@ -9,7 +9,7 @@ app = Flask(__name__)
 # Database connection settings come from environment variables,
 # so the same container works locally and on the worker VMs.
 DB_URL = os.environ.get(
-    "DATABASE_URL", "postgresql://wildcam:wildcam@localhost:5432/wildcam"
+    "DATABASE_URL", "postgresql://postgres:password@db:5432/wildcam"
 )
 
 

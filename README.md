@@ -19,7 +19,7 @@ The app reads one environment variable:
 
 | Variable | Example |
 |---|---|
-| `DATABASE_URL` | `postgresql://wildcam:PASSWORD@192.168.100.10:5432/wildcam` |
+| `DATABASE_URL` | `postgresql://postgres:PASSWORD@192.168.100.101:5432/wildcam` |
 
 The table is created automatically on first start.
 
@@ -27,8 +27,9 @@ The table is created automatically on first start.
 
 ```
 docker build -t wildcam .
-docker run -d --name wildcam --restart unless-stopped -p 8000:8000 \
-  -e DATABASE_URL=postgresql://wildcam:PASSWORD@192.168.100.10:5432/wildcam \
+docker run -d --name wildcam --restart always \
+  --hostname "$(hostname)" -p 8080:8000 \
+  -e DATABASE_URL=postgresql://postgres:PASSWORD@192.168.100.101:5432/wildcam \
   wildcam
 ```
 
