@@ -1,8 +1,18 @@
 services:
-  app:
+  lair:
     build: .
     environment:
+      APP_TYPE: lair
       DATABASE_URL: postgresql://postgres:password@192.168.100.101:5432/wildcam
     ports:
       - "8000:8000"
+    restart: always
+
+  sea:
+    build: .
+    environment:
+      APP_TYPE: sea
+      DATABASE_URL: postgresql://postgres:password@192.168.100.101:5432/wildcam
+    ports:
+      - "8001:8000"
     restart: always
